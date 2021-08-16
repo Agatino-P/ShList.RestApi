@@ -38,12 +38,8 @@ namespace ShList.RestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShList.RestApi", Version = "v1" });
             });
 
-            string connectionString = Configuration.GetConnectionString("SqlLite");
-
+            services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(Configuration.GetConnectionString("SqlLite")));
             services.AddScoped<IGuidRepository<Product>, ProductRepository>();
-            services.AddDbContext<ShoppingListContext>(options => options.UseSqlite(connectionString));
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
