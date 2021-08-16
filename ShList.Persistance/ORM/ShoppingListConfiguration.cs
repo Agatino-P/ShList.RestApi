@@ -9,16 +9,16 @@ namespace ShList.Persistance.ORM
 
         public void Configure(EntityTypeBuilder<ShoppingList> builder)
         {
-            //builder.OwnsMany(typeof(ShItem), "_items",
-            //    shi =>
-            //    {
-            //        shi.Property<int>("Id");
-            //        shi.HasKey("Id");
-            //        shi.WithOwner().HasForeignKey("ShListId");
-            //        shi.Property("ShopId").IsRequired(false);
-            //        shi.ToTable("ShItems");
-            //    });
-            //builder.Ignore("Items");
+            builder.OwnsMany(typeof(ShItem), "_items",
+                shi =>
+                {
+                    shi.Property<int>("Id");
+                    shi.HasKey("Id");
+                    shi.WithOwner().HasForeignKey("ShListId");
+                    shi.Property("ShopId").IsRequired(false);
+                    shi.ToTable("ShItems");
+                });
+            builder.Ignore("Items");
         }
     }
 }

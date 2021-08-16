@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AP.DDD.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using ShList.Domain.Models;
 using ShList.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,22 +14,33 @@ namespace ShList.RestApi.Controllers
     [ApiController]
     public class Products : ControllerBase
     {
+        private readonly IGuidRepository<Product> _repository;
+
+        public Products(IGuidRepository<Product> repository)
+        {
+            _repository = repository;
+        }
+        
         // GET: api/<Products>
         [HttpGet]
         public IEnumerable<ProductDto> Get()
         {
-            return new List<ProductDto>()
-            {
-                new ProductDto(Guid.NewGuid(),"P1","D1"),
-                new ProductDto(Guid.NewGuid(), "P2", "D2")
-            };
+            IReadOnlyCollection<Product> products = _repository.GetAll();
+            return products.Select(p => new ProductDto(p.Id, p.Name, p.Notes));
+
+            //return new List<ProductDto>()
+            //{
+            //    new ProductDto(Guid.NewGuid(),"P1","D1"),
+            //    new ProductDto(Guid.NewGuid(), "P2", "D2")
+            //};
         }
 
         // GET api/<Products>/5
         [HttpGet("{id}")]
         public ActionResult<ProductDto> Get(Guid id)
         {
-            return Ok(new ProductDto(id, "id1", "desc1"));
+            Product product = _repository.GetById(id);
+            return Ok(new ProductDto(product.Id, product.Name, product.Notes));
         }
 
         // POST api/<Products>

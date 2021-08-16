@@ -38,6 +38,7 @@ namespace ShList.RestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShList.RestApi", Version = "v1" });
             });
 
+            //services.AddDbContext<ShoppingListContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLite")));
             services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(Configuration.GetConnectionString("SqlLite")));
             services.AddScoped<IGuidRepository<Product>, ProductRepository>();
         }
