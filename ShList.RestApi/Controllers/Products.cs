@@ -4,6 +4,7 @@ using ShList.Domain.Models;
 using ShList.Dto;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,7 +27,7 @@ namespace ShList.RestApi.Controllers
         public IEnumerable<ProductDto> Get()
         {
             IReadOnlyCollection<Product> products = _repository.GetAll();
-            return products.Select(p => new ProductDto(p.Id, p.Name, p.Notes));
+            return products.Select(p => toDto(p));
 
             //return new List<ProductDto>()
             //{
@@ -40,13 +41,28 @@ namespace ShList.RestApi.Controllers
         public ActionResult<ProductDto> Get(Guid id)
         {
             Product product = _repository.GetById(id);
-            return Ok(new ProductDto(product.Id, product.Name, product.Notes));
+            return Ok(toDto(product));
         }
 
         // POST api/<Products>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<ProductDto> Post([FromBody] ProductDto dto)
         {
+            //we maybe should look into using transactions
+            //to avoid someone creatig the record between read and write bt with guid...
+            Product product = _repository.GetById(dto.Id);
+            if (product==null)
+            {
+                product = toProduct(dto);
+                _repository.Add(product);
+            }
+            else
+            {
+                product.SetName(dto.Name);
+                product.SetNotes(dto.Notes);
+                _repository.Update(product);
+            }
+            return Ok(toDto(product));
         }
 
         // PUT api/<Products>/5
@@ -60,5 +76,13 @@ namespace ShList.RestApi.Controllers
         public void Delete(int id)
         {
         }
+
+        private ProductDto toDto(Product product) => new ProductDto(product.Id, product.Name, product.Notes);
+
+        private Product toProduct(ProductDto dto)
+        {
+            return new Product(dto.Name, dto.Notes);
+        }
+
     }
 }
