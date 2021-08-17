@@ -4,7 +4,6 @@ using ShList.Domain.Models;
 using ShList.Dto;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,7 +20,7 @@ namespace ShList.RestApi.Controllers
         {
             _repository = repository;
         }
-        
+
         // GET: api/<Products>
         [HttpGet]
         public IEnumerable<ProductDto> Get()
@@ -51,7 +50,7 @@ namespace ShList.RestApi.Controllers
             //we maybe should look into using transactions
             //to avoid someone creatig the record between read and write bt with guid...
             Product product = _repository.GetById(dto.Id);
-            if (product==null)
+            if (product == null)
             {
                 product = toProduct(dto);
                 _repository.Add(product);
@@ -71,18 +70,16 @@ namespace ShList.RestApi.Controllers
         {
         }
 
-        // DELETE api/<Products>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<Products>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
 
         private ProductDto toDto(Product product) => new ProductDto(product.Id, product.Name, product.Notes);
 
-        private Product toProduct(ProductDto dto)
-        {
-            return new Product(dto.Name, dto.Notes);
-        }
+        private Product toProduct(ProductDto dto) => new Product(dto.Name, dto.Notes);
+
 
     }
 }

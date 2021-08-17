@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ShList.Domain.Models;
-using ShList.Persistance.Repositories.Models;
 using ShList.Persistance.ORM;
+using ShList.Persistance.Repositories.Models;
 
 namespace ShList.RestApi
 {
@@ -50,7 +50,12 @@ namespace ShList.RestApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShList.RestApi v1"));
+                app.UseSwaggerUI(c =>
+                    {
+                        //c.ConfigObject.
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShList.RestApi v1");
+                    }
+                );
             }
 
             app.UseHttpsRedirection();
