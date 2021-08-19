@@ -64,17 +64,14 @@ namespace ShList.RestApi.Controllers
             return Ok(toDto(product));
         }
 
-        // PUT api/<Products>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // DELETE api/<Products>/5
+        [HttpDelete("{id}")]
+        public ActionResult<ProductDto> Delete(Guid id)
         {
+            Product product = _repository.GetById(id);
+            _repository.Delete(id);
+            return Ok(toDto(product));
         }
-
-        //// DELETE api/<Products>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
 
         private ProductDto toDto(Product product) => new ProductDto(product.Id, product.Name, product.Notes);
 

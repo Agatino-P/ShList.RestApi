@@ -58,9 +58,9 @@ namespace ShList.Persistance.Repositories.Models
             return _context.Products.Find(id);
         }
 
-        public void Delete(Product p)
+        public void Delete(Guid id)
         {
-            _context.Products.Remove(p);
+            _context.Products.Remove( _context.Products.Find(id));
             _context.SaveChanges();
         }
     }
