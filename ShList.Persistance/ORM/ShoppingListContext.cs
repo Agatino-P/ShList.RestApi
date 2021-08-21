@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using ShList.Domain.Models;
+using System.IO;
+using System;
+using static System.Net.WebRequestMethods;
 
 namespace ShList.Persistance.ORM
 {
@@ -15,8 +19,10 @@ namespace ShList.Persistance.ORM
         //public DbSet<ShoppingList> ShLists { get; set; }
 
         public ShoppingListContext(string connectionString)
-        {
-            _connectionString = connectionString;
+{
+            const string prefix = "Data Source = file:";
+            string appDir= AppDomain.CurrentDomain.GetData("DataDirectory") as string ?? AppDomain.CurrentDomain.BaseDirectory;
+            _connectionString = prefix + Path.GetFullPath(Path.Combine(appDir, connectionString));
         }
         //public ShoppingListContext(DbContextOptions<ShoppingListContext> options) : base(options)
         //{
@@ -29,8 +35,8 @@ namespace ShList.Persistance.ORM
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        //    string SqliteDbPath = @"d:\Git Local Repository\ShList\db\ShoppingList.db";
-        //    string SqliteConnectionString = $"Data Source=file:{SqliteDbPath}";
+            //    string SqliteDbPath = @"d:\Git Local Repository\ShList\db\ShoppingList.db";
+            //    string SqliteConnectionString = $"Data Source=file:{SqliteDbPath}";
             optionsBuilder.UseSqlite(_connectionString);
         }
     }

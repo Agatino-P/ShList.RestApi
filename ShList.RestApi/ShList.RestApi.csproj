@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>b4c69003-6aac-4120-a5ea-bdd037d17553</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileRunArguments>-p 5001:5001 -p 5000:5000</DockerfileRunArguments>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,5 +17,4 @@
     <ProjectReference Include="..\..\ShList.Dto.Sol\ShList.Dto\ShList.Dto.csproj" />
     <ProjectReference Include="..\ShList.Persistance\ShList.Persistance.csproj" />
   </ItemGroup>
-
 </Project>

@@ -14,4 +14,10 @@
     <ProjectReference Include="..\..\ShList.Domain.Sol\ShList.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DB\ShoppingList.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

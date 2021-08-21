@@ -2,8 +2,12 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5001
+EXPOSE 5000
+ENV PLUTO=https://+:5001;http://+:5000
+ENV ASPNETCORE_URLS=https://+:5001;http://+:5000
+ENV PAPERINO="https://+:5001;http://+:5000"
+ENV PIPPO="PIPPOPIPPO1"
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
