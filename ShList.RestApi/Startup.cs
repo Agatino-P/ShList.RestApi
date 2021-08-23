@@ -24,7 +24,7 @@ namespace ShList.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
+            services.AddCors(options => 
             {
                 options.AddPolicy("FixCORS", builder =>
                 {
@@ -52,11 +52,12 @@ namespace ShList.RestApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                     {
-                        //c.ConfigObject.
                         c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShList.RestApi v1");
                     }
                 );
             }
+
+            app.UseCors("FixCORS");
 
             app.UseHttpsRedirection();
 
