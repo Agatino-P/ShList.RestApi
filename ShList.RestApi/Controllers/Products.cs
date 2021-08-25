@@ -1,4 +1,4 @@
-﻿using AP.DDD.Interfaces;
+﻿using Ap.DDD.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using ShList.Domain.Models;
 using ShList.Dto;

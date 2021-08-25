@@ -9,12 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="ShList.Dto" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\ShList.Domain.Sol\ShList.Domain.csproj" />
-    <ProjectReference Include="..\..\ShList.Dto.Sol\ShList.Dto\ShList.Dto.csproj" />
     <ProjectReference Include="..\ShList.Persistance\ShList.Persistance.csproj" />
   </ItemGroup>
 </Project>
