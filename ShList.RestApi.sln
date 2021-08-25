@@ -5,13 +5,9 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.RestApi", "ShList.RestApi\ShList.RestApi.csproj", "{D262B3B1-937C-45B5-94F8-F00E70917D8C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ap.DDD", "..\Ap.DDD.Sol\Ap.DDD\Ap.DDD.csproj", "{4FDFDACC-B062-4693-A5FD-0615FC227D02}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.Dto", "..\ShList.Dto.Sol\ShList.Dto\ShList.Dto.csproj", "{B11D3D81-8F29-480A-9498-A3190322508C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.Persistance", "ShList.Persistance\ShList.Persistance.csproj", "{3E10C033-36AE-42B1-A4F8-1805471EBC21}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ap.FunctionalProgramming", "..\Ap.FunctionalProgramming.Sol\Ap.FunctionalProgramming\Ap.FunctionalProgramming.csproj", "{AF697B01-CA73-4AB9-9C7C-EA1216716590}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.Domain", "..\ShList.Domain.Sol\ShList.Domain.csproj", "{A2A6D915-5C54-4AEB-9B87-A927B472ED8F}"
 EndProject
@@ -25,10 +21,6 @@ Global
 		{D262B3B1-937C-45B5-94F8-F00E70917D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D262B3B1-937C-45B5-94F8-F00E70917D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D262B3B1-937C-45B5-94F8-F00E70917D8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FDFDACC-B062-4693-A5FD-0615FC227D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FDFDACC-B062-4693-A5FD-0615FC227D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FDFDACC-B062-4693-A5FD-0615FC227D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FDFDACC-B062-4693-A5FD-0615FC227D02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B11D3D81-8F29-480A-9498-A3190322508C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B11D3D81-8F29-480A-9498-A3190322508C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B11D3D81-8F29-480A-9498-A3190322508C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,10 +29,6 @@ Global
 		{3E10C033-36AE-42B1-A4F8-1805471EBC21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E10C033-36AE-42B1-A4F8-1805471EBC21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E10C033-36AE-42B1-A4F8-1805471EBC21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF697B01-CA73-4AB9-9C7C-EA1216716590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF697B01-CA73-4AB9-9C7C-EA1216716590}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF697B01-CA73-4AB9-9C7C-EA1216716590}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF697B01-CA73-4AB9-9C7C-EA1216716590}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2A6D915-5C54-4AEB-9B87-A927B472ED8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2A6D915-5C54-4AEB-9B87-A927B472ED8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2A6D915-5C54-4AEB-9B87-A927B472ED8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
