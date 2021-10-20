@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using ShList.Domain.Models;
 using ShList.Persistance.ORM;
 using ShList.Persistance.Repositories.Models;
+using System.IO;
+using System;
 
 namespace ShList.RestApi
 {
@@ -38,8 +40,16 @@ namespace ShList.RestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShList.RestApi", Version = "v1" });
             });
 
-            //services.AddDbContext<ShoppingListContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLite")));
-            services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(Configuration.GetConnectionString("SqlLite")));
+
+            //For SQLite
+            //const string prefix = "Data Source = file:";
+            //string appDir = AppDomain.CurrentDomain.GetData("DataDirectory") as string ?? AppDomain.CurrentDomain.BaseDirectory;
+            //string connectionString = prefix + Path.GetFullPath(Path.Combine(appDir, Configuration.GetConnectionString("SqlLite")));
+
+            string connectionString = Configuration.GetConnectionString("Sql");
+
+            services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(connectionString));
+
             services.AddScoped<IGuidRepository<Product>, ProductRepository>();
         }
 
