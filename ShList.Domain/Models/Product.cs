@@ -18,9 +18,17 @@ namespace ShList.Domain.Models
         
         public Product(string name, string notes) : base()
         {
-            Name = name;
+            SetName(name);
             SetNotes(notes);
         }
+
+        public Product(Guid id, string name, string notes)
+        {
+            Id = id;
+            SetName(name);
+            SetNotes(notes);
+        }
+
         public void SetName(string name)
         {
             //add guard clause against null, empty is fine

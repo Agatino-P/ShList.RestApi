@@ -18,7 +18,7 @@ namespace ShList.Persistance.Repositories.Models
 
         public Product Add(Product product)
         {
-            _context.Products.Add(new Product(product.Name, product.Notes));
+            _context.Products.Add(product);
             _context.SaveChanges();
             return product;
         }

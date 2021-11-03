@@ -27,12 +27,6 @@ namespace ShList.RestApi.Controllers
         {
             IReadOnlyCollection<Product> products = _repository.GetAll();
             return products.Select(p => toDto(p));
-
-            //return new List<ProductDto>()
-            //{
-            //    new ProductDto(Guid.NewGuid(),"P1","D1"),
-            //    new ProductDto(Guid.NewGuid(), "P2", "D2")
-            //};
         }
 
         // GET api/<Products>/5
@@ -47,8 +41,6 @@ namespace ShList.RestApi.Controllers
         [HttpPost]
         public ActionResult<ProductDto> Post([FromBody] ProductDto dto)
         {
-            //we maybe should look into using transactions
-            //to avoid someone creatig the record between read and write bt with guid...
             Product product = _repository.GetById(dto.Id);
             if (product == null)
             {
@@ -75,7 +67,7 @@ namespace ShList.RestApi.Controllers
 
         private ProductDto toDto(Product product) => new ProductDto(product.Id, product.Name, product.Notes);
 
-        private Product toProduct(ProductDto dto) => new Product(dto.Name, dto.Notes);
+        private Product toProduct(ProductDto dto) => new Product(dto.Id, dto.Name, dto.Notes);
 
 
     }
