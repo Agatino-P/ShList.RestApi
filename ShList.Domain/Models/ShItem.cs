@@ -1,30 +1,28 @@
 ﻿using Ap.DDD.Models;
-using System.Collections.Generic;
+using ShList.Dto;
 
 namespace ShList.Domain.Models
 {
-    public class ShItem : ValueObject
+    public partial class ShItem : GuidEntity
     {
         public Product Product { get; private set; }
+        public ShIQuantity Quantity { get; private set; }
+        public ShItemStatus Status { get; private set; }
+        public Department Department { get; private set; }
         public Shop Shop { get; private set; }
-        public int Quantity { get; private set; }
+
 
         private ShItem()
         {
 
         }
 
-        public ShItem(Product product, int quantity)
+        public ShItem(Product product, ShIQuantity quantity, ShItemStatus status= ShItemStatus.Active)
         {
             Product = product;
             Quantity = quantity;
+            Status = status;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Product;
-            yield return Shop;
-            yield return Quantity;
-        }
     }
 }

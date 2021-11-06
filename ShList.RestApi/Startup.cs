@@ -41,16 +41,13 @@ namespace ShList.RestApi
             });
 
 
-            //For SQLite
-            //const string prefix = "Data Source = file:";
-            //string appDir = AppDomain.CurrentDomain.GetData("DataDirectory") as string ?? AppDomain.CurrentDomain.BaseDirectory;
-            //string connectionString = prefix + Path.GetFullPath(Path.Combine(appDir, Configuration.GetConnectionString("SqlLite")));
 
             string connectionString = Configuration.GetConnectionString("Sql");
 
             services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(connectionString));
 
             services.AddScoped<IGuidRepository<Product>, ProductRepository>();
+            services.AddScoped<IGuidRepository<ShoppingList>, ShoppingListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

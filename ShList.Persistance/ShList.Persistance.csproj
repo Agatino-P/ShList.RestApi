@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="ShList.Dto" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DB\ShoppingList.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
