@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace ShList.Persistance.Repositories.Models
 {
-    public class ProductRepository : IGuidRepository<Product>
+    public class ProductRepository : IValueObjectRepository<Product,string>
     {
-        private readonly ShoppingListContext _context;
+        private readonly ShListContext _context;
 
-        public ProductRepository(ShoppingListContext context)
+        public ProductRepository(ShListContext context)
         {
             _context = context;
         }
@@ -53,14 +53,14 @@ namespace ShList.Persistance.Repositories.Models
             return _context.Products.ToList();
         }
 
-        public Product GetById(Guid id)
+        public Product GetById(string name)
         {
-            return _context.Products.Find(id);
+            return _context.Products.Find(name);
         }
 
-        public void Delete(Guid id)
+        public void Delete(string name)
         {
-            _context.Products.Remove( _context.Products.Find(id));
+            _context.Products.Remove( _context.Products.Find(name));
             _context.SaveChanges();
         }
     }

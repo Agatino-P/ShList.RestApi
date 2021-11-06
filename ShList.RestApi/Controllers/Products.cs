@@ -14,9 +14,9 @@ namespace ShList.RestApi.Controllers
     [ApiController]
     public class Products : ControllerBase
     {
-        private readonly IGuidRepository<Product> _repository;
+        private readonly IValueObjectRepository<Product, string> _repository;
 
-        public Products(IGuidRepository<Product> repository)
+        public Products(IValueObjectRepository<Product, string> repository)
         {
             _repository = repository;
         }
@@ -30,10 +30,10 @@ namespace ShList.RestApi.Controllers
         }
 
         // GET api/<Products>/5
-        [HttpGet("{id}")]
-        public ActionResult<ProductDto> Get(Guid id)
+        [HttpGet("{name}")]
+        public ActionResult<ProductDto> Get(string name)
         {
-            Product product = _repository.GetById(id);
+            Product product = _repository.GetById(name);
             return Ok(toDto(product));
         }
 
@@ -41,7 +41,7 @@ namespace ShList.RestApi.Controllers
         [HttpPost]
         public ActionResult<ProductDto> Post([FromBody] ProductDto dto)
         {
-            Product product = _repository.GetById(dto.Id);
+            Product product = _repository.GetById(dto.Name);
             if (product == null)
             {
                 product = toProduct(dto);
@@ -49,8 +49,8 @@ namespace ShList.RestApi.Controllers
             }
             else
             {
-                product.SetName(dto.Name);
-                product.SetNotes(dto.Notes);
+                //product.SetName(dto.Name);
+                product.SetDepartment(dto.Department);
                 _repository.Update(product);
             }
             return Ok(toDto(product));
@@ -58,16 +58,16 @@ namespace ShList.RestApi.Controllers
 
         // DELETE api/<Products>/5
         [HttpDelete("{id}")]
-        public ActionResult<ProductDto> Delete(Guid id)
+        public ActionResult<ProductDto> Delete(string name)
         {
-            Product product = _repository.GetById(id);
-            _repository.Delete(id);
+            Product product = _repository.GetById(name);
+            _repository.Delete(name);
             return Ok(toDto(product));
         }
 
-        private ProductDto toDto(Product product) => new ProductDto(product.Id, product.Name, product.Notes);
+        private ProductDto toDto(Product product) => new ProductDto(product.Name, product.Department);
 
-        private Product toProduct(ProductDto dto) => new Product(dto.Id, dto.Name, dto.Notes);
+        private Product toProduct(ProductDto dto) => new Product(dto.Name, dto.Department);
 
 
     }

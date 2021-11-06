@@ -5,7 +5,7 @@ using System.IO;
 
 namespace ShList.Persistance.ORM
 {
-    public class ShoppingListContext : DbContext
+    public class ShListContext : DbContext
     {
         private readonly string _connectionString;
 
@@ -15,15 +15,16 @@ namespace ShList.Persistance.ORM
         //public DbSet<Shop> Shops { get; set; }
         public DbSet<ShoppingList> ShoppingLists { get; set; }
 
-        public ShoppingListContext(string connectionString)
+        public ShListContext(string connectionString)
         {
             _connectionString = connectionString;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
             modelBuilder.ApplyConfiguration(new ShoppingListConfiguration());
-            //modelBuilder.ApplyConfiguration(new ShItemConfiguration());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

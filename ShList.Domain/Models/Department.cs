@@ -1,8 +1,9 @@
 ﻿using Ap.DDD.Models;
+using System.Collections.Generic;
 
 namespace ShList.Domain.Models
 {
-    public class Department : GuidEntity
+    public class Department : ValueObject
     {
         private Department() : base()
         {
@@ -13,5 +14,10 @@ namespace ShList.Domain.Models
         }
 
         public string Name { get; private set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Name;
+        }
     }
 }

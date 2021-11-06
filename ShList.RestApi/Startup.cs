@@ -44,9 +44,9 @@ namespace ShList.RestApi
 
             string connectionString = Configuration.GetConnectionString("Sql");
 
-            services.AddScoped<ShoppingListContext>(_ => new ShoppingListContext(connectionString));
+            services.AddScoped<ShListContext>(_ => new ShListContext(connectionString));
 
-            services.AddScoped<IGuidRepository<Product>, ProductRepository>();
+            services.AddScoped<IValueObjectRepository<Product,string>, ProductRepository>();
             services.AddScoped<IGuidRepository<ShoppingList>, ShoppingListRepository>();
         }
 

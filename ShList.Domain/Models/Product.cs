@@ -1,12 +1,13 @@
 ﻿using Ap.DDD.Models;
 using System;
+using System.Collections.Generic;
 
 namespace ShList.Domain.Models
 {
-    public class Product : GuidEntity
+    public class Product : ValueObject
     {
         public string Name { get; private set; }
-        public string Notes { get; private set; } = string.Empty;
+        public string Department { get; private set; } = string.Empty;
 
         //for EF
         private Product() : base()
@@ -16,29 +17,29 @@ namespace ShList.Domain.Models
         public Product(string name) : this(name, string.Empty)
         { }
         
-        public Product(string name, string notes) : base()
-        {
+        public Product(string name, string department)
+        { 
             SetName(name);
-            SetNotes(notes);
+            SetDepartment(department);
         }
 
-        public Product(Guid id, string name, string notes)
-        {
-            Id = id;
-            SetName(name);
-            SetNotes(notes);
-        }
-
+        
         public void SetName(string name)
         {
             //add guard clause against null, empty is fine
             Name = name;
         }
 
-        public void SetNotes(string notes)
+        public void SetDepartment(string notes)
         {
             //add guard clause against null, empty is fine
-            Notes = notes;
+            Department = notes;
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Name;
+            yield return Department;
         }
     } 
 }

@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ShList.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,9 +19,9 @@ namespace ShList.RestApi.Controllers
         public ShoppingLists(IGuidRepository<ShoppingList> repository)
         {
             _repository = repository;
-            Product product = new("productTest");
+            Product product = new("productTest", "departmentTest");
             ShItem.ShIQuantity quantity = new(3);
-            ShItem item = new ShItem(product, quantity);
+            ShItem item = new ShItem(product, null,null, quantity);
             _shoppingList.Add(item);
 
         }

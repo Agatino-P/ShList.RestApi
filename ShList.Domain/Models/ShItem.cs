@@ -5,11 +5,11 @@ namespace ShList.Domain.Models
 {
     public partial class ShItem : GuidEntity
     {
-        public Product Product { get; private set; }
-        public ShIQuantity Quantity { get; private set; }
+        public string Product { get; private set; }
+        public string Department{ get; private set; }
+        public string Shop { get; private set; }
+        public int  Quantity { get; private set; }
         public ShItemStatus Status { get; private set; }
-        public Department Department { get; private set; }
-        public Shop Shop { get; private set; }
 
 
         private ShItem()
@@ -17,12 +17,13 @@ namespace ShList.Domain.Models
 
         }
 
-        public ShItem(Product product, ShIQuantity quantity, ShItemStatus status= ShItemStatus.Active)
+        public ShItem(Product product, Department department = null, Shop shop = null, ShIQuantity quantity= null, ShItemStatus status= ShItemStatus.Active)
         {
-            Product = product;
+            Product = product.Name;
+            Department = department?.Name ?? product.Department; ;
+            Shop = shop.Name;
             Quantity = quantity;
             Status = status;
         }
-
     }
 }

@@ -11,9 +11,9 @@ namespace ShList.Persistance.Repositories.Models
 {
     public class ShoppingListRepository : IGuidRepository<ShoppingList>
     {
-        private readonly ShoppingListContext _context;
+        private readonly ShListContext _context;
 
-        public ShoppingListRepository(ShoppingListContext context)
+        public ShoppingListRepository(ShListContext context)
         {
             _context = context;
         }

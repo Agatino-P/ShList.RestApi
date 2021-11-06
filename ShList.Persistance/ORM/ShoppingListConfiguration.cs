@@ -10,7 +10,7 @@ namespace ShList.Persistance.ORM
 
         public void Configure(EntityTypeBuilder<ShoppingList> builder)
         {
-            builder.OwnsMany(typeof(ShItem), "_items").OwnsOne(typeof(ShItem.ShIQuantity), "Quantity");
+            builder.OwnsMany(typeof(ShItem), "_items");
             builder.Ignore("Items");
         }
     }
