@@ -34,7 +34,7 @@ namespace ShList.Domain.Models
 
         internal ShItemDto ToDto()
         {
-            return new ShItemDto(Product, Department, Shop, Quantity, Status);
+            return new ShItemDto(Product, Department, Shop, Quantity, Status.ToString());
         }
     }
 }

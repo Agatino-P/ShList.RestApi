@@ -5,6 +5,7 @@ using ShList.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +23,11 @@ namespace ShList.RestApi.Controllers
         {
             _repository = repository;
             
-            Product product = new("productTest", "departmentTest");
-            ShItem.ShIQuantity quantity = new(3);
-            ShItem item = new ShItem(product, null,null, quantity);
-            _shoppingList.Add(item);
-            repository.Add(_shoppingList);
+            //Product product = new("productTest", "departmentTest");
+            //ShItem.ShIQuantity quantity = new(3);
+            //ShItem item = new ShItem(product, null,null, quantity);
+            //_shoppingList.Add(item);
+            //repository.Add(_shoppingList);
         }
 
         // GET: api/<ShoppingListController>
@@ -39,9 +40,10 @@ namespace ShList.RestApi.Controllers
 
         // GET api/<ShoppingListController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ShoppingListDto Get(Guid id)
         {
-            return "value";
+            ShoppingList sl = _repository.GetById(id);
+            return sl.ToDto();
         }
 
         // POST api/<ShoppingListController>
@@ -60,8 +62,9 @@ namespace ShList.RestApi.Controllers
 
         // DELETE api/<ShoppingListController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            _repository.Delete(id);
         }
     }
 }
