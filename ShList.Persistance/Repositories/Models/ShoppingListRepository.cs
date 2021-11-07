@@ -60,7 +60,7 @@ namespace ShList.Persistance.Repositories.Models
 
         public ShoppingList GetById(Guid id)
         {
-            return _context.ShoppingLists.Include("_items").FirstOrDefault();
+            return _context.ShoppingLists.Include("_items").FirstOrDefault(sl=>sl.Id==id);
         }
 
         public void Delete(Guid id)
