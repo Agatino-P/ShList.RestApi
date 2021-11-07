@@ -21,7 +21,7 @@ namespace ShList.Domain.Models
         {
             Product = product.Name;
             Department = department?.Name ?? product.Department; ;
-            Shop = shop.Name;
+            Shop = shop?.Name;
             Quantity = quantity;
             Status = status;
         }

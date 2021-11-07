@@ -1,4 +1,6 @@
 ﻿using Ap.DDD.Models;
+using ShList.Dto;
+using System;
 using System.Collections.Generic;
 
 namespace ShList.Domain.Models
@@ -30,5 +32,9 @@ namespace ShList.Domain.Models
             }
         }
 
+        internal ShItemDto ToDto()
+        {
+            return new ShItemDto(Product, Department, Shop, Quantity, Status);
+        }
     }
 }

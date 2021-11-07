@@ -10,6 +10,8 @@ namespace ShList.Persistance.ORM
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.HasKey(d => d.Name);
+            builder.Property(b => b.Name).HasMaxLength(50); 
+
         }
     }
 }

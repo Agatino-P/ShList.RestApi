@@ -1,8 +1,10 @@
 ﻿using Ap.DDD.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using ShList.Domain.Models;
+using ShList.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,18 +21,20 @@ namespace ShList.RestApi.Controllers
         public ShoppingLists(IGuidRepository<ShoppingList> repository)
         {
             _repository = repository;
+            
             Product product = new("productTest", "departmentTest");
             ShItem.ShIQuantity quantity = new(3);
             ShItem item = new ShItem(product, null,null, quantity);
             _shoppingList.Add(item);
-
+            repository.Add(_shoppingList);
         }
 
         // GET: api/<ShoppingListController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ShoppingListDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            IReadOnlyCollection<ShoppingList> lists = _repository.GetAll();
+            return lists.Select(shl => shl.ToDto());
         }
 
         // GET api/<ShoppingListController>/5

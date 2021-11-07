@@ -10,8 +10,14 @@ namespace ShList.Persistance.ORM
 
         public void Configure(EntityTypeBuilder<ShoppingList> builder)
         {
-            builder.OwnsMany(typeof(ShItem), "_items");
+            builder.HasKey(shl => shl.Id);
+            builder.HasMany<ShItem>("_items")
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Ignore("Items");
+
+            //builder.Property(p => p.Name).HasColumnType("varchar(50)");
+
         }
     }
 }

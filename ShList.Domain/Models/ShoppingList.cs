@@ -2,13 +2,15 @@
 using Ap.DDD.Models;
 using System;
 using System.Collections.Generic;
+using ShList.Dto;
+using System.Linq;
 
 namespace ShList.Domain.Models
 {
     public class ShoppingList : GuidEntity
     {
         public string Name { get; private set; }
-        public DateTime DateTime { get; private set; }
+        public DateTime Created { get; private set; }
 
         private List<ShItem> _items = new();
         public IList<ShItem> Items => _items.AsReadOnly();
@@ -17,10 +19,10 @@ namespace ShList.Domain.Models
         {
 
         }
-        public ShoppingList(string name, DateTime dateTime) : base()
+        public ShoppingList(string name, DateTime created) : base()
         {
             Name = name;
-            DateTime = dateTime;
+            Created = created;
         }
 
 
@@ -38,5 +40,14 @@ namespace ShList.Domain.Models
 
             return Result<ShItem>.Ok(shItem);
         }
+
+        public ShoppingListDto ToDto()
+        {
+            ShoppingListDto retval = new ShoppingListDto(
+                Id, Name, Created, Items.Select(i => i.ToDto())
+                );
+            return retval;
+        }
+
     }
 }
