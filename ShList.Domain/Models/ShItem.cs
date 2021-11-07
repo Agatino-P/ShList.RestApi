@@ -1,5 +1,6 @@
 ﻿using Ap.DDD.Models;
 using ShList.Dto;
+using System;
 
 namespace ShList.Domain.Models
 {
@@ -15,6 +16,17 @@ namespace ShList.Domain.Models
         private ShItem()
         {
 
+        }
+        public ShItem(ShItemDto dto)
+        {
+            Product = dto.Product;
+            Department = dto.Department; ;
+            Shop = dto.Shop;
+            Quantity = dto.Quantity;
+            if (Enum.TryParse<ShItemStatus>(dto.Status, out ShItemStatus status))
+            {
+                Status = status;
+            }
         }
 
         public ShItem(Product product, Department department = null, Shop shop = null, ShIQuantity quantity= null, ShItemStatus status= ShItemStatus.Active)

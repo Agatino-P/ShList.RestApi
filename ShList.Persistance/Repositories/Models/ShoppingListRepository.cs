@@ -1,4 +1,5 @@
 ﻿using Ap.DDD.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using ShList.Domain.Models;
 using ShList.Persistance.ORM;
 using System;
@@ -27,7 +28,9 @@ namespace ShList.Persistance.Repositories.Models
 
         public void Update(ShoppingList shoppingList)
         {
-            _context.ShoppingLists.Update(shoppingList);
+            
+            //_context.ShoppingLists.Attach(shoppingList);
+            _context.Update(shoppingList);
             _context.SaveChanges();
         }
 
@@ -52,12 +55,12 @@ namespace ShList.Persistance.Repositories.Models
 
         public IReadOnlyCollection<ShoppingList> GetAll()
         {
-            return _context.ShoppingLists.ToList();
+            return _context.ShoppingLists.Include("_items").ToList();
         }
 
         public ShoppingList GetById(Guid id)
         {
-            return _context.ShoppingLists.Find(id);
+            return _context.ShoppingLists.Include("_items").FirstOrDefault();
         }
 
         public void Delete(Guid id)

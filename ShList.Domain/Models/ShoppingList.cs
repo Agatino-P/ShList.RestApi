@@ -49,5 +49,14 @@ namespace ShList.Domain.Models
             return retval;
         }
 
+        public void ClearItems()
+        {
+            _items.Clear();
+        }
+
+        public void SetItems(IEnumerable<ShItem> items)
+        {
+            _items = new List<ShItem>(items);  
+        }
     }
 }

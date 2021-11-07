@@ -15,10 +15,14 @@ namespace ShList.Persistance.ORM
         //public DbSet<Shop> Shops { get; set; }
         public DbSet<ShoppingList> ShoppingLists { get; set; }
 
-        public ShListContext(string connectionString)
+        public ShListContext(DbContextOptions<ShListContext> contextOptions) : base(contextOptions)
         {
-            _connectionString = connectionString;
+
         }
+        //public ShListContext(string connectionString)
+        //{
+        //    _connectionString = connectionString;
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,9 +31,9 @@ namespace ShList.Persistance.ORM
             modelBuilder.ApplyConfiguration(new ShoppingListConfiguration());
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(_connectionString);
+        //}
     }
 }

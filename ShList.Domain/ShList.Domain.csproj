@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Ap.DDD" Version="1.0.2" />
     <PackageReference Include="Ap.FunctionalProgramming" Version="1.0.0" />
-    <PackageReference Include="ShList.Dto" Version="1.0.9" />
+    <PackageReference Include="ShList.Dto" Version="1.0.10" />
   </ItemGroup>
 
 </Project>

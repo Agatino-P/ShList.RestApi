@@ -40,11 +40,10 @@ namespace ShList.RestApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShList.RestApi", Version = "v1" });
             });
 
-
-
             string connectionString = Configuration.GetConnectionString("Sql");
-
-            services.AddScoped<ShListContext>(_ => new ShListContext(connectionString));
+            services.AddDbContext<ShListContext>(options => {
+                    options.UseSqlServer(connectionString);
+                });
 
             services.AddScoped<IValueObjectRepository<Product,string>, ProductRepository>();
             services.AddScoped<IGuidRepository<ShoppingList>, ShoppingListRepository>();
