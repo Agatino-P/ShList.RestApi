@@ -19,6 +19,7 @@ namespace ShList.Domain.Models
         }
         public ShItem(ShItemDto dto)
         {
+            Id= dto.Id;
             Product = dto.Product;
             Department = dto.Department; ;
             Shop = dto.Shop;
@@ -29,13 +30,13 @@ namespace ShList.Domain.Models
             }
         }
 
-        public ShItem(Product product, Department department = null, Shop shop = null, ShIQuantity quantity= null, ShItemStatus status= ShItemStatus.Active)
-        {
-            Product = product.Name;
-            Department = department?.Name ?? product.Department; ;
-            Shop = shop?.Name;
-            Quantity = quantity;
-            Status = status;
-        }
+        //public ShItem(Product product, Department department = null, Shop shop = null, ShIQuantity quantity= null, ShItemStatus status= ShItemStatus.Active)
+        //{
+        //    Product = product.Name;
+        //    Department = department?.Name ?? product.Department; ;
+        //    Shop = shop?.Name;
+        //    Quantity = quantity;
+        //    Status = status;
+        //}
     }
 }

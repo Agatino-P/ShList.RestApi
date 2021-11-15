@@ -32,7 +32,8 @@ namespace ShList.Persistance.Repositories.Models
         {
             
             //_context.ShoppingLists.Attach(shoppingList);
-            _context.Update(shoppingList);
+            _context.Remove(shoppingList);
+            _context.Add(shoppingList);
             _context.SaveChanges();
         }
 

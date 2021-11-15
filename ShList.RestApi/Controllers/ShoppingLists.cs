@@ -73,9 +73,9 @@ namespace ShList.RestApi.Controllers
             }
         }
 
-        // PUT api/<ShoppingListController>/guid/guid/Status/status
-        [HttpPut("{listId}/{itemId}/status")]
-        public ActionResult Put(Guid listId, Guid itemId, string status)
+        // PUT api/<ShoppingListController>/guid/guid/status/status
+        [HttpPut("{listId}/{itemId}/status/{status}")]
+        public ActionResult PutItemStatus(Guid listId, Guid itemId, string status)
         {
             ShoppingList shList = _repository.GetById(listId);
             if (shList == null)
@@ -92,6 +92,28 @@ namespace ShList.RestApi.Controllers
                 return BadRequest(itemId);
             }
             
+            _repository.Update(_shoppingList);
+            return Ok();
+        }
+
+        // PUT api/<ShoppingListController>/guid/guid/status/status
+        [HttpPut("{listId}/{itemId}/quantity/{status}")]
+        public ActionResult PutItemQuantity(Guid listId, Guid itemId, int quantity)
+        {
+            ShoppingList shList = _repository.GetById(listId);
+            if (shList == null)
+                return NotFound(listId);
+
+            if (quantity<0)
+            {
+                return BadRequest(quantity);
+            }
+
+            if (!shList.SetItemQuantity(itemId, quantity))
+            {
+                return BadRequest(itemId);
+            }
+
             _repository.Update(_shoppingList);
             return Ok();
         }

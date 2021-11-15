@@ -68,5 +68,13 @@ namespace ShList.Domain.Models
             return true;
         }
 
+        public bool SetItemQuantity(Guid shItemId, int quantity)
+        {
+            var item = _items.FirstOrDefault(i => i.Id == shItemId);
+            if (item == null || quantity<0)
+                return false;
+            item.SetQuantity(quantity);
+            return true;
+        }
     }
 }

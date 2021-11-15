@@ -34,12 +34,18 @@ namespace ShList.Domain.Models
 
         internal ShItemDto ToDto()
         {
-            return new ShItemDto(Product, Department, Shop, Quantity, Status.ToString());
+            return new ShItemDto(Id, Product, Department, Shop, Quantity, Status.ToString());
         }
 
         internal void SetStatus(ShItemStatus status)
         {
             Status = status;
+        }
+
+        internal void SetQuantity(int quantity)
+        {
+            //Should have a guard clause
+            Quantity=quantity;
         }
     }
 }
