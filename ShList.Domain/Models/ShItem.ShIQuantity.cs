@@ -36,5 +36,10 @@ namespace ShList.Domain.Models
         {
             return new ShItemDto(Product, Department, Shop, Quantity, Status.ToString());
         }
+
+        internal void SetStatus(ShItemStatus status)
+        {
+            Status = status;
+        }
     }
 }

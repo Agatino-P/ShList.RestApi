@@ -5,6 +5,7 @@ using ShList.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -72,13 +73,29 @@ namespace ShList.RestApi.Controllers
             }
         }
 
-        // PUT api/<ShoppingListController>/5
-        [HttpPut("{id}")]
-        public void Put(int id/*, [FromBody] string value*/)
+        // PUT api/<ShoppingListController>/guid/guid/Status/status
+        [HttpPut("{listId}/{itemId}/status")]
+        public ActionResult Put(Guid listId, Guid itemId, string status)
         {
-            _repository.Add(_shoppingList);
-            //_repository
+            ShoppingList shList = _repository.GetById(listId);
+            if (shList == null)
+                return NotFound(listId);
+
+            ShItemStatus itemStatus;
+             if (!Enum.TryParse<ShItemStatus>( status, out itemStatus))
+            {
+                return BadRequest(status);
+            }
+
+            if (!shList.SetItemStatus(itemId, itemStatus))
+            {
+                return BadRequest(itemId);
+            }
+            
+            _repository.Update(_shoppingList);
+            return Ok();
         }
+
 
         // DELETE api/<ShoppingListController>/5
         [HttpDelete("{id}")]

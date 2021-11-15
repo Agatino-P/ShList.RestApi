@@ -21,20 +21,21 @@ namespace ShList.RestApi.Controllers
             _repository = repository;
         }
 
+
         // GET: api/<Products>
         [HttpGet]
         public IEnumerable<ProductDto> Get()
         {
             IReadOnlyCollection<Product> products = _repository.GetAll();
-            return products.Select(p => toDto(p));
+            return products.Select(p=>p.ToDto());
         }
 
-        // GET api/<Products>/5
+        // GET api/<Products>/Product1
         [HttpGet("{name}")]
         public ActionResult<ProductDto> Get(string name)
         {
             Product product = _repository.GetById(name);
-            return Ok(toDto(product));
+            return Ok(product.ToDto());
         }
 
         // POST api/<Products>
@@ -44,30 +45,25 @@ namespace ShList.RestApi.Controllers
             Product product = _repository.GetById(dto.Name);
             if (product == null)
             {
-                product = toProduct(dto);
+                product = new Product(dto);
                 _repository.Add(product);
             }
             else
             {
-                //product.SetName(dto.Name);
                 product.SetDepartment(dto.Department);
                 _repository.Update(product);
             }
-            return Ok(toDto(product));
+            return Ok(product.ToDto());
         }
 
-        // DELETE api/<Products>/5
+        // DELETE api/<Products>/Product_1
         [HttpDelete("{id}")]
         public ActionResult<ProductDto> Delete(string name)
         {
             Product product = _repository.GetById(name);
             _repository.Delete(name);
-            return Ok(toDto(product));
+            return Ok(product.ToDto());
         }
-
-        private ProductDto toDto(Product product) => new ProductDto(product.Name, product.Department);
-
-        private Product toProduct(ProductDto dto) => new Product(dto.Name, dto.Department);
 
 
     }

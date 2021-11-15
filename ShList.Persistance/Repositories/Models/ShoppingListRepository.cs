@@ -1,7 +1,9 @@
 ﻿using Ap.DDD.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ShList.Domain.Models;
+using ShList.Dto;
 using ShList.Persistance.ORM;
+using ShList.Persistance.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShList.Persistance.Repositories.Models
 {
-    public class ShoppingListRepository : IGuidRepository<ShoppingList>
+    public class ShoppingListRepository : IShoppingListRepository
     {
         private readonly ShListContext _context;
 
@@ -65,8 +67,14 @@ namespace ShList.Persistance.Repositories.Models
 
         public void Delete(Guid id)
         {
-            _context.ShoppingLists.Remove(_context.ShoppingLists.Find(id));
+            ShoppingList shoppingList = _context.ShoppingLists.Find(id);
+
+            if (shoppingList != null)
+            {
+            _context.ShoppingLists.Remove(shoppingList);
             _context.SaveChanges();
+            }
         }
+
     }
 }

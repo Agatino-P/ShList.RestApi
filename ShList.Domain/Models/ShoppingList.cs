@@ -58,5 +58,15 @@ namespace ShList.Domain.Models
         {
             _items = new List<ShItem>(items);  
         }
+
+        public bool SetItemStatus(Guid shItemId, ShItemStatus itemStatus)
+        {
+            var item = _items.FirstOrDefault(i=> i.Id == shItemId);
+            if (item == null)
+                return false;
+            item.SetStatus(itemStatus);
+            return true;
+        }
+
     }
 }
