@@ -32,9 +32,11 @@ namespace ShList.Persistance.Repositories.Models
         {
             
             //_context.ShoppingLists.Attach(shoppingList);
-            _context.Remove(shoppingList);
-            _context.Add(shoppingList);
+            _context.ShoppingLists.Remove(shoppingList);
             _context.SaveChanges();
+            _context.ShoppingLists.Add(shoppingList);
+            _context.SaveChanges();
+
         }
 
         public IReadOnlyCollection<ShoppingList> AddOrUpdate(IEnumerable<ShoppingList> ShoppingLists)

@@ -18,7 +18,6 @@ namespace ShList.RestApi.Controllers
 
         private readonly IGuidRepository<ShoppingList> _repository;
 
-        private ShoppingList _shoppingList = new("TestShl", DateTime.Now);
         public ShoppingLists(IGuidRepository<ShoppingList> repository)
         {
             _repository = repository;
@@ -92,7 +91,7 @@ namespace ShList.RestApi.Controllers
                 return BadRequest(itemId);
             }
             
-            _repository.Update(_shoppingList);
+            _repository.Update(shList);
             return Ok();
         }
 
@@ -114,7 +113,7 @@ namespace ShList.RestApi.Controllers
                 return BadRequest(itemId);
             }
 
-            _repository.Update(_shoppingList);
+            _repository.Update(shList);
             return Ok();
         }
 
